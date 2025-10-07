@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solomon Hannson - Mechanical Product Design Engineer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            transition: all 0.3s;
+        }
+        
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 0.7rem 1.5rem;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        
+        .btn-outline-light {
+            padding: 0.7rem 1.5rem;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 10px auto;
+        }
+        
+        .about-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .profile-image {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .skill-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .projects-section {
+            padding: 100px 0;
+        }
+        
+        .project-card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-card .card-body {
+            padding: 20px;
+        }
+        
+        .project-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .project-card .card-text {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .project-tag {
+            background-color: #f1f8ff;
+            color: var(--secondary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Project Overlay Styles */
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 152, 219, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .project-overlay-content h5 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-overlay-content p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-section {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-section .section-title {
+            color: white;
+        }
+        
+        .contact-section .section-title:after {
+            background: var(--secondary-color);
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            background-color: var(--secondary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-details {
+            margin-top: 40px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details h5 {
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+        
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--secondary-color);
+            color: white;
+            box-shadow: none;
+        }
+        
+        footer {
+            background-color: #1a252f;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+            
+            .contact-form {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hannson</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1>Solomon Hannson</h1>
+            <h2>Mechanical Product Design Engineer</h2>
+            <p class="mt-4">Transforming innovative concepts into precision-engineered products that solve real-world challenges</p>
+            <div class="mt-5">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline-light">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="John Anderson" class="profile-image">
+                </div>
+                <div class="col-lg-8">
+                    <h3>Education</h3>
+                    <p>M.S. in Mechanical Engineering from MIT, with a focus on product design and advanced manufacturing techniques.</p>
+                    
+                    <h3 class="mt-4">Experience</h3>
+                    <p>5+ years designing consumer products, medical devices, and industrial equipment. Proven track record of bringing concepts from ideation to production.</p>
+                    
+                    <h3 class="mt-4">Philosophy</h3>
+                    <p>I believe great design balances form, function, and manufacturability. Every project is an opportunity to create something meaningful and sustainable.</p>
+                    
+                    <h3 class="mt-4">Core Skills</h3>
+                    <div class="mt-3">
+                        <span class="skill-badge">SolidWorks & CAD Design</span>
+                        <span class="skill-badge">Prototyping & Testing</span>
+                        <span class="skill-badge">Materials Selection</span>
+                        <span class="skill-badge">Product Development</span>
+                        <span class="skill-badge">Design for Manufacturing</span>
+                        <span class="skill-badge">FEA & Simulation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="text-center mb-5">A selection of my recent work showcasing innovative solutions across various industries</p>
+            
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-md-4">
+                    <a href="project-details.html" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Precision Optical Device">
+                            <div class="project-overlay">
+                                <div class="project-overlay-content">
+                                    <h5>View Project Details</h5>
+                                    <p>Click to see the complete project case study</p>
+                                    <span class="btn btn-light">Learn More</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Precision Optical Device</h5>
+                            <p class="card-text">Designed a high-precision optical measurement device with advanced lens systems and ergonomic controls. Achieved 99.8% accuracy in field testing.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Product Design</span>
+                                <span class="project-tag">Optical Engineering</span>
+                                <span class="project-tag">Ergonomics</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-4">
+                    <a href="project-details.html" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Industrial Gear System">
+                            <div class="project-overlay">
+                                <div class="project-overlay-content">
+                                    <h5>View Project Details</h5>
+                                    <p>Click to see the complete project case study</p>
+                                    <span class="btn btn-light">Learn More</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Industrial Gear System</h5>
+                            <p class="card-text">Engineered a next-generation gear transmission system for heavy machinery. Reduced maintenance requirements by 40% through innovative design.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Mechanical Design</span>
+                                <span class="project-tag">CAD/CAM</span>
+                                <span class="project-tag">FEA Analysis</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-4">
+                    <a href="project-details.html" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sustainable Home Products">
+                            <div class="project-overlay">
+                                <div class="project-overlay-content">
+                                    <h5>View Project Details</h5>
+                                    <p>Click to see the complete project case study</p>
+                                    <span class="btn btn-light">Learn More</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Sustainable Home Products</h5>
+                            <p class="card-text">Created a line of eco-friendly household items using recycled materials. Won the 2023 Green Design Award for sustainability innovation.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Sustainable Design</span>
+                                <span class="project-tag">Material Innovation</span>
+                                <span class="project-tag">Consumer Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="text-center mb-5">Interested in collaborating or have a project in mind? I'd love to hear from you.</p>
+            
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-lg-6">
+                    <div class="contact-details">
+                        <h5>Email</h5>
+                        <p>solomonhannson@email.com</p>
+                        
+                        <h5 class="mt-4">Phone</h5>
+                        <p>+1 (555) 123-4567</p>
+                        
+                        <h5 class="mt-4">LinkedIn</h5>
+                        <p>linkedin.com/in/solomonhannson</p>
+                        
+                        <h5 class="mt-4">GitHub</h5>
+                        <p>github.com/solomonhannson</p>
+                    </div>
+                    <p class="mt-4">Available for freelance projects and full-time opportunities</p>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons mb-3">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© 2024 Solomon Hannson. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').style.backgroundColor = 'rgba(44, 62, 80, 0.95)';
+                document.querySelector('.navbar').style.padding = '0.5rem 0';
+            } else {
+                document.querySelector('.navbar').style.backgroundColor = 'var(--primary-color)';
+                document.querySelector('.navbar').style.padding = '1rem 0';
+            }
+        });
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
